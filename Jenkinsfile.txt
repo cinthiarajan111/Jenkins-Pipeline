@@ -1,0 +1,23 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Checkout') {
+            steps {
+                checkout([$class: 'GitSCM', branches: [[name: 'feature-devbranch']], extensions: [], userRemoteConfigs: [[credentialsId: 'efa5dfcb-3b05-4cfe-b17c-ae49f6fd0e8a', url: 'https://github.com/cinthiarajan111/Jenkins-Pipeline.git']]])
+            }
+        }
+        stage('Running the bash file') {
+            steps {
+                sh 'bash script.sh'
+            }
+        }
+        stage('Display Message') {
+            steps {
+                echo 'Main branch checkedout and the bash script file id run using Pipeline-Script'
+            }
+        }
+        
+    }
+ }
+
